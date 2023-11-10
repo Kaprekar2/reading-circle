@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="髙良">
+<meta name="dcterms.date" content="2023-11-10">
+
+<title>数理生物学 10・11章</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="redcircle_files/libs/clipboard/clipboard.min.js"></script>
+<script src="redcircle_files/libs/quarto-html/quarto.js"></script>
+<script src="redcircle_files/libs/quarto-html/popper.min.js"></script>
+<script src="redcircle_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="redcircle_files/libs/quarto-html/anchor.min.js"></script>
+<link href="redcircle_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="redcircle_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="redcircle_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="redcircle_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="redcircle_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#章" id="toc-章" class="nav-link active" data-scroll-target="#章">10章</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">10.1</a></li>
+  <li><a href="#生物が適応的行動を取る理由" id="toc-生物が適応的行動を取る理由" class="nav-link" data-scroll-target="#生物が適応的行動を取る理由">10.2生物が適応的行動を取る理由</a></li>
+  <li><a href="#採餌場所の決定" id="toc-採餌場所の決定" class="nav-link" data-scroll-target="#採餌場所の決定">10.3 採餌場所の決定</a></li>
+  <li><a href="#餌の探し方" id="toc-餌の探し方" class="nav-link" data-scroll-target="#餌の探し方">10.4 餌の探し方</a></li>
+  <li><a href="#収量変動の効果" id="toc-収量変動の効果" class="nav-link" data-scroll-target="#収量変動の効果">10.5 収量変動の効果</a></li>
+  </ul></li>
+  <li><a href="#章-成長と繁殖の戦略" id="toc-章-成長と繁殖の戦略" class="nav-link" data-scroll-target="#章-成長と繁殖の戦略">11章 成長と繁殖の戦略</a>
+  <ul class="collapse">
+  <li><a href="#卵数と卵サイズ" id="toc-卵数と卵サイズ" class="nav-link" data-scroll-target="#卵数と卵サイズ">11.1 卵数と卵サイズ</a>
+  <ul class="collapse">
+  <li><a href="#ラグランジュ" id="toc-ラグランジュ" class="nav-link" data-scroll-target="#ラグランジュ">ラグランジュ</a></li>
+  </ul></li>
+  <li><a href="#陸上植物の地上部地下部のバランス" id="toc-陸上植物の地上部地下部のバランス" class="nav-link" data-scroll-target="#陸上植物の地上部地下部のバランス">11.2 陸上植物の地上部/地下部のバランス</a></li>
+  <li><a href="#回繁殖か繰り返し繁殖か" id="toc-回繁殖か繰り返し繁殖か" class="nav-link" data-scroll-target="#回繁殖か繰り返し繁殖か">11.3 1回繁殖か繰り返し繁殖か</a></li>
+  <li><a href="#なぜマルサス係数が進化の基準として使えるのか" id="toc-なぜマルサス係数が進化の基準として使えるのか" class="nav-link" data-scroll-target="#なぜマルサス係数が進化の基準として使えるのか">11.4 なぜマルサス係数が進化の基準として使えるのか</a></li>
+  <li><a href="#老衰の進化" id="toc-老衰の進化" class="nav-link" data-scroll-target="#老衰の進化">11.5老衰の進化</a></li>
+  <li><a href="#生涯の繁殖成功度" id="toc-生涯の繁殖成功度" class="nav-link" data-scroll-target="#生涯の繁殖成功度">11.6 生涯の繁殖成功度</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">数理生物学 10・11章</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>髙良 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 10, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="章" class="level1">
+<h1>10章</h1>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">10.1</h2>
+<p>餌となりうるものが <span class="math inline">n</span> 種あり、 <span class="math inline">i = 1, 2,\cdots, n</span> といった様にそれぞれ区別される</p>
+<p>これら <span class="math inline">i</span> 種の餌に <strong>出会う確率を <span class="math inline">\lambda_i</span> </strong>とする。 <span class="math inline">i</span> 種の餌を食べると <strong>カロリー <span class="math inline">g_i</span> </strong> が得られるが、食べ始めてから次の探索を行うまでに <strong>処理時間 <span class="math inline">h_i</span></strong> が必要になる。</p>
+<p>餌によってはコスパが悪い（ <span class="math inline">g_i</span> に対して <span class="math inline">h_i</span> が大きい）ため、探索者は食べる時もあれば食べない時もある。 そのため <span class="math inline">i</span> 種の餌それぞれに対し <strong>出会った時に食べる確率の組 <span class="math inline">(p_1, p_2, \cdots, p_n)</span></strong> を定義する。</p>
+<p>探索し出会って (<span class="math inline">\lambda_i</span>)、食べるか判断し (<span class="math inline">p_i</span>)、処理する (<span class="math inline">h_i</span>) というサイクルを繰り返す場合、捕食速度は（つまり <span class="math inline">\lambda_i</span> あたりのカロリー <span class="math inline">g_ip_i</span> は）1サイクルあたりの平均カロリーを1サイクルあたりの平均所要時間で割れば求まる。</p>
+<p>まず1サイクルで出会う餌が <span class="math inline">i</span> 種である確率は <span class="math inline">\lambda_i / \sum\limits_i \lambda_i</span> であり、そのカロリーは <span class="math inline">g_i</span> である。<span class="math inline">i</span> 種の期待カロリーは、確率をかけて表すことができ <span class="math display">
+\frac
+{\lambda_i}{\sum\limits_i \lambda_i}p_ig_i
+</span> 出会う <span class="math inline">i</span> 種すべての総和をとって <span class="math display">
+\frac
+{\sum\limits_i\lambda_i p_i \boldsymbol g_i} {\sum\limits_i \lambda_i}
+</span> 1サイクル中の期待カロリーとすることができる。</p>
+<p>次に1サイクル中で得た餌 <span class="math inline">n</span> 種の期待処理時間もカロリーと同じ様に計算できる。 <span class="math display">
+\frac
+{\sum\limits_i\lambda_i p_i \boldsymbol h_i} {\sum\limits_i \lambda_i}
+</span></p>
+<p>ただし所要時間として1サイクルの開始（つまり<strong>探索の開始</strong>)から、餌を見つけるまでの時も考慮しなければならない。 開始してから <span class="math inline">n</span> 種のどれかに会うまでの確率は単位時間あたり <span class="math inline">1/\sum\limits_i</span> で表すことができる。</p>
+<p>これらより、期待カロリーを期待時間で割ると求まる捕食速度 <span class="math inline">r</span> は以下の様に書ける。</p>
+<p><span class="math display">
+r(p_1, p_2, \cdots, p_n) =
+\frac
+{ \dfrac{\sum\limits_i \lambda_i p_i g_i } {\sum\limits_i\lambda_i}}
+{ \dfrac{1}{\sum\limits_i \lambda_i} + \dfrac{\sum\limits_i\lambda_i p_i h_i} {\sum\limits_i \lambda_i}}
+\\
+</span></p>
+<p><span class="math inline">r</span> を最大にする食べ方(各餌の <span class="math inline">p</span> の最適な割り振り)を求めるために <span class="math inline">p_k</span> を微分すると <span class="math display">
+\partial r/\partial p_k =
+\bigg\{ \dfrac {\lambda_k h_k} {1 + \sum\limits_{i} \lambda_i p_i h_i} \bigg\}
+\bigg\{ \dfrac {g_k}{h_k}-r \bigg\}
+</span> この式から <span class="math inline">\dfrac {g_k}{h_k}</span> が <span class="math inline">r</span> より大きい餌は食べられ、<span class="math inline">r</span> より小さいと食べられない。</p>
+<p>会う頻度 <span class="math inline">\lambda_i</span> が関係ないのが面白い。</p>
+<p>存在する <span class="math inline">n</span> 種の餌を <span class="math inline">\dfrac {g_i}{h_i}</span> の値が大きい順に並べていくと <span class="math display">
+\dfrac {g_1}{h_1} &gt; \dfrac {g_2}{h_2} &gt; \cdots &gt; \dfrac {g_k}{h_k} &gt; r &gt; \dfrac {g_{k+1}}{h_{k+1}} &gt; \dots
+</span> となり <strong><span class="math inline">r</span> より小さい期待カロリーが小さい餌は食べない</strong>、すなわち <span class="math inline">\boldsymbol p_i \boldsymbol = \boldsymbol 0</span> となる。</p>
+<p>実際に動物を用いた実験では、大きい餌に専念する利益が小さい場合には専食する割合が非常に少ない。</p>
+<p><img src="./static/IMG_9025.png" class="img-fluid" style="width:70.0%"> <br><br><br></p>
+</section>
+<section id="生物が適応的行動を取る理由" class="level2">
+<h2 class="anchored" data-anchor-id="生物が適応的行動を取る理由">10.2生物が適応的行動を取る理由</h2>
+<p>餌探しのコストを小さくできれば繁殖行動などにリソースを費やすことができ、繁殖成功度（適応度）を上げることができる。</p>
+<p>動物行動の<strong>遺伝的基盤は環境中のデータを元に餌選択を行うための方法</strong>を規定していて、それは適応的な方向に進化している。</p>
+<p>前節の捕食速度 <span class="math inline">r</span> は評価関数と呼ばれ最適化の基礎的な尺度の一つであり合理的意思決定に役立つ。 <br><br><br></p>
+</section>
+<section id="採餌場所の決定" class="level2">
+<h2 class="anchored" data-anchor-id="採餌場所の決定">10.3 採餌場所の決定</h2>
+<p>10.1の餌選択モデルでは、さまざまな餌が完全に混合していて（確率に基づき）ランダムに出会うと仮定した。</p>
+<p>変わって、距離が離れた別々の2点にそれぞれ別の昆虫1と2がいる。この場合、同時に餌を狙うことができないため<strong>片方の餌の捕食速度がもう片方より大きい場合にのみ採餌が続く</strong>。</p>
+<p>つまり <span class="math display">
+\dfrac {\lambda_1 g_1}{1 + \lambda_1 h_1} &gt; \dfrac {\lambda_2 g_2}{1 + \lambda_2 h_2}
+</span> の場合にのみ1種の昆虫が好まれる。</p>
+<p>そのため、ある餌の密度が高くなると急にそれが食べられ始める。</p>
+</section>
+<section id="餌の探し方" class="level2">
+<h2 class="anchored" data-anchor-id="餌の探し方">10.4 餌の探し方</h2>
+<p>10.3の様に、鳥は餌の昆虫がいる木（パッチ）を飛び回っている。</p>
+<p>それぞれのパッチでは餌がなくなるまで探すべきか、適当に切り上げるべきかを考える。 <br> <br> 昆虫の数や見つかりやすさの異なる <span class="math inline">n</span> 種のパッチを考える。1つのパッチで得られる餌の量は、探索時間 ( <span class="math inline">t_i</span> ) の増加関数 ( <span class="math inline">G_i(t_i)</span> ) で与えられる。また1つのパッチ内での捕食速度は時間と共に減少する。</p>
+<p>これらから、10.1の各式を利用して、餌をパッチに置き換えることで表せる。</p>
+<p>まず <span class="math inline">p_i</span> (食べるかどうかの確率)は用いず、 <span class="math inline">h_i</span> はパッチ内での探索時間に含まれるためこれらは除く。</p>
+<p>なので<strong>期待捕獲量</strong>と<strong>期待探索時間</strong>が <span class="math display">
+\begin{gather}
+\frac
+{\sum\limits_i\lambda_i \boldsymbol {G_i(t_i) }} {\sum\limits_i \lambda_i}
+\\
+\dfrac
+{1}{\sum\limits_i\lambda_i} +
+\frac
+{\sum\limits_i \lambda_i \boldsymbol {t_i}} {\sum\limits_i \lambda_i}
+\end{gather}
+</span> とそれぞれ表せ</p>
+<p><span class="math display">
+r(t_1, t_2, \cdots, t_n) =
+\frac
+{ \dfrac{\sum\limits_i \lambda_i \boldsymbol {G_i(t_i)} } {\sum\limits_i\lambda_i}}
+{ \dfrac{1}{\sum\limits_i \lambda_i} + \dfrac{\sum\limits_i\lambda_i \boldsymbol {t_i}} {\sum\limits_i \lambda_i}}
+\\
+</span> となる。</p>
+<p>この捕食速度 <span class="math inline">r</span> を <span class="math inline">t_i \ge 0, \dots, t_n \ge 0</span> という制約のもとで最大にするものを探すために <span class="math inline">t_i</span> について微分する。</p>
+<p><span class="math inline">r</span> を最大にする解が、<span class="math inline">t_1 \ge 0, \dots, t_k \ge 0, t_{k+1} = \dots = t_n = 0</span> だったとすると</p>
+<p><span class="math display">
+\begin{gather}
+\dfrac {dG_i(t_i)}{dt} = r &amp; i = 1, 2,\dots, k
+\\
+\dfrac {dG_i(0)}{dt} &lt; r &amp; i = k+1,\dots, n
+\end{gather}
+</span> が成立。</p>
+<p>捕食速度が減速していき、平均 <span class="math inline">r</span> を下回る場合は現在のパッチを放棄して新たなパッチに移る方が良い。</p>
+<p>パッチ間の距離が長くなり <span class="math inline">1 / \lambda_i</span> が大きくなれば期待捕食速度 <span class="math inline">r</span> の値が下がるため、パッチで探索する時間が長くなる。 <br> <br></p>
+</section>
+<section id="収量変動の効果" class="level2">
+<h2 class="anchored" data-anchor-id="収量変動の効果">10.5 収量変動の効果</h2>
+<p>多くの状況で生物は <strong>収量の平均が同じでもばらつきが少ない場所を好む</strong>。これはリスク回避的行動と言われる。例えば摂食量の増分に対して適応度がの増分が緩やかになっていく場合、餌の量が増えても適応度があまり変化しない。</p>
+<p>この時に適応度の平均裏を尺度とすると、餌の量がばらつかない方が適応度の平均値的に安定であるため餌場として適当であると考えることができる。 <br> <br></p>
+</section>
+</section>
+<section id="章-成長と繁殖の戦略" class="level1">
+<h1>11章 成長と繁殖の戦略</h1>
+<section id="卵数と卵サイズ" class="level2">
+<h2 class="anchored" data-anchor-id="卵数と卵サイズ">11.1 卵数と卵サイズ</h2>
+<p>卵のサイズが小さいと体サイズは小さく、生活史の初期段階も長いため死亡率が高くなるが繁殖に割ける資源は限られているため大きい卵は数を産むことができない。</p>
+<p><strong>1卵の重量を <span class="math inline">x</span>、卵数を <span class="math inline">y</span> とする</strong>。</p>
+<p>子の生存率を卵サイズ <span class="math inline">x</span> の増加関数として <span class="math inline">S(x)</span> とすると、子の期待生存率は <span class="math inline">\phi = y S(x)</span> と表せる。さらに卵を生産するのに親が使える資源を <span class="math inline">xy = \rho</span> と考える。</p>
+<p>この制約のもと <span class="math inline">\phi</span> を最大にする <span class="math inline">x</span> と <span class="math inline">y</span> を求める。</p>
+<p>制約条件 <span class="math inline">xy = \rho</span> を代入して、 <span class="math inline">\phi = \dfrac {\rho S(x)}{x}</span> 。</p>
+<p>卵サイズと生存率の関係を表す曲線は、卵サイズが大きくなるほど生存率が上がることが考えられる（S字とか）。 <span class="math inline">\dfrac { S(x)}{x}</span> は卵サイズと生存率をグラフにしたときに原点から伸びる線分の傾きであるため、この線が卵サイズ-生存率曲線に接する点が最適卵サイズ <span class="math inline">x^*</span> になる。</p>
+<p>なので <span class="math inline">\phi</span> を <span class="math inline">x</span> で微分すると <span class="math inline">\dfrac {d \bigg\{ \dfrac {S(x)}{x} \bigg\}} {dx} = 0</span> より</p>
+<p><span class="math display">
+\dfrac {x^*dS(x)}{dx} = S(x^*)
+</span> が導かれて、最適卵サイズがもとまる。</p>
+<section id="ラグランジュ" class="level3">
+<h3 class="anchored" data-anchor-id="ラグランジュ">ラグランジュ</h3>
+<p>未知の定数 <span class="math inline">\lambda</span> と制約条件を用いて <span class="math display">
+\Phi = yS(x) + \lambda (\rho-xy)
+</span> これを <span class="math inline">x</span> と <span class="math inline">y</span> それぞれについて偏微分してそれを0とおいた <span class="math display">
+\begin{gather}
+\dfrac {\partial \Phi}{\partial x} = \dfrac {y\ dS(x)}{dx} - \lambda y = 0
+\\
+\dfrac {\partial \Phi}{\partial y} = S(x) - \lambda x = 0
+\end{gather}
+</span> これらの式から <span class="math inline">\lambda</span> を消すと <span class="math inline">\dfrac {x^*dS(x)}{dx} = S(x^*)</span> が導かれる。</p>
+<p>最適卵サイズ <span class="math inline">x^*</span>　は、<span class="math inline">\rho</span> (つまり資源の総量)には依存せず生存率 <span class="math inline">S(x)</span> によって決まるので大きな卵を産む方が有利になる。 <br> <br> <br></p>
+</section>
+</section>
+<section id="陸上植物の地上部地下部のバランス" class="level2">
+<h2 class="anchored" data-anchor-id="陸上植物の地上部地下部のバランス">11.2 陸上植物の地上部/地下部のバランス</h2>
+<p>植物の器官のサイズは環境に対してバランスを保って変化する。得られる水分量が多いと枝葉は大きく成長するが、地下の根は貧弱になる。逆に栄養塩類や水分が不足して日光などが十分にある場合、地上部が貧弱になるが根などは成長する。</p>
+<p>光合成による物質生産において光吸収は葉によって行われるため、光合成速度は地上部の成長に比例する。また根も光合成に必要な水や栄養を吸収するため、根の成長も光合成に寄与する</p>
+<p>一日あたりの<strong>純光合成の速度を</strong>、<strong>地上部サイズ <span class="math inline">x</span> と地下部サイズ <span class="math inline">y</span> を変数とする増加関数 <span class="math inline">g(x, y)</span> で表す</strong>。</p>
+<p>さらに、<strong><span class="math inline">L</span> を地上部の光 <span class="math inline">W</span> を土壌の含水量とする</strong>。</p>
+<p>これらから以下の式を定義する。 <span class="math display">
+g(x, y) = \dfrac {1}{\dfrac{a}{Lx^b} + \dfrac{c}{Wy^d}}
+</span> 植物の総重量が一定の <span class="math inline">x+y = \rho</span> という条件下で純光合成速度が最大になるものをラグランジュの未定乗数によって解くと <span class="math display">
+[地下部] \propto [光 / 土壌成分]^ \frac {1}{(d+1)} [地上部]^ \frac {(b+1)}{(d+1)}
+</span> となる。</p>
+<p>異なる器官のサイズの対数が線形関係を満たす成長スキームということを示している。 <br> <br> <br></p>
+</section>
+<section id="回繁殖か繰り返し繁殖か" class="level2">
+<h2 class="anchored" data-anchor-id="回繁殖か繰り返し繁殖か">11.3 1回繁殖か繰り返し繁殖か</h2>
+<p>無性生殖する生物について考える。</p>
+<p>長い時間が経つと、安定齢分布に達して密度が時間 <span class="math inline">t</span> に依存して指数増加していく。</p>
+<p>この時の人口増加率 <span class="math inline">r</span> がマルサス係数で、離散時間の齢分布モデルの <span class="math inline">\lambda</span> を置き換えた場合</p>
+<p><span class="math display">
+1 = \sum_{x=0} e^{-r(x+1)}\ l_x\ m_x
+</span> となる。<span class="math inline">l_x</span> は子の <span class="math inline">x</span> 歳までの生存率、<span class="math inline">m_x</span> は <span class="math inline">x</span> 歳での出産率。</p>
+<p>毎年同じ率で繁殖し続ける生物を考える。</p>
+<p>雌1匹から生まれる子数が <span class="math inline">N</span> でその半分が雌で翌年までの生存率が <span class="math inline">q</span> なら <span class="math inline">m_0 = m_1 = \dots = \frac {qN}{2}</span> 。成体の年間生存率も等しく <span class="math inline">p_0 = p_1 = \dots = p</span> の場合、マルサス係数 <span class="math inline">r</span> は</p>
+<p><span class="math display">
+1 = \sum_{x=0} e^{-r(x+1)} p^i \frac {qN}{2} = \frac {qN}{2e^r(\frac {1-p}{e^r})}
+</span> を満たすもので <span class="math inline">r = log(\frac {qN}{2+p})</span> になる。</p>
+<p>最初の繁殖時に全ての成体が死ぬタイプ (<span class="math inline">p = 0</span>) と、生き残り繁殖を続けるタイプ (<span class="math inline">p &gt; 0</span>)がいて前者のタイプの方が子供の数が多いとする。マルサス係数を比較すると、子の数 <span class="math inline">N</span> の差が <span class="math inline">\frac {2p}{q}</span>を超えると一回繁殖が有利になる。</p>
+</section>
+<section id="なぜマルサス係数が進化の基準として使えるのか" class="level2">
+<h2 class="anchored" data-anchor-id="なぜマルサス係数が進化の基準として使えるのか">11.4 なぜマルサス係数が進化の基準として使えるのか</h2>
+<p>1つの懸念点として雌個体から生まれた子が全て親と同一の生活史を持つと考えているが、ある遺伝子型の雌が親が荒廃したのと同じ遺伝子タイプを持つ個体と必ず交配するという仮定は置けない。しかし実際には、雌雄の齢別周産率が比例していて任意交配が仮定できる場合は、先述のモデルが適用できることがわかっている。</p>
+<p>つまり異なる遺伝子型タイプの <span class="math inline">l_x</span> と <span class="math inline">m_x</span> からマルサス係数を比較することで集団内で遺伝子型が増えるかどうかという、適応度に関する議論ができる。</p>
+<p>もう1つは生存率・出産率が個体の密度に影響されないのかという点である。この仮定では個体数は増大するが、実際には定常状態にある場合(あるタイプが集団内で優占している場合)マルサス係数は0になる。</p>
+<p>優占しているタイプが進化的に安定で変異の拡大を許さない場合は変異を持ったタイプが入り込んできたとしてもそのタイプは減少し消滅する、つまりマルサス係数が負と捉えることができる。そのため平衡状態では優占種のマルサス係数が他のどのタイプよりも大きいということができる。 <br> <br> <br></p>
+</section>
+<section id="老衰の進化" class="level2">
+<h2 class="anchored" data-anchor-id="老衰の進化">11.5老衰の進化</h2>
+<p>出産率を上げると生存率を維持するためには相応の資源が必要になる。</p>
+<p>例として生存率に対する感度の式を用いる。 <span class="math display">
+\dfrac {\partial \lambda}{\partial m_k} =\dfrac {1}{p_k} \sum_{a \ge k+1} \dfrac {m_a l_a}{\lambda^a T_g}
+</span></p>
+<p>この式では生存率は繁殖開始齢以前に大きく繁殖齢後はほとんど0になる。</p>
+<p>そのため若齢の生存率をあげる方が適応度の改善が期待でき、ある死亡要因発現を高齢期にずらせるような遺伝子が集団中に広がる。</p>
+<p>また別の例として <span class="math inline">k</span> 歳での生存率と出産率に対する <span class="math inline">r</span> の感度の比は <span class="math display">
+\dfrac{\dfrac {\partial \lambda}{\partial p_k}} {\dfrac {\partial \lambda}{\partial m_k}} = \dfrac{v_{k+1}}{v_0}
+</span> となって <span class="math inline">k+1</span> 歳での繁殖価（産むことができる子の総数を生まれた時期で調整して算出した値）に比例している。</p>
+<p>老齢になると繁殖価が減少するので、現在での繁殖が非常に重要。 <br> <br> <br></p>
+</section>
+<section id="生涯の繁殖成功度" class="level2">
+<h2 class="anchored" data-anchor-id="生涯の繁殖成功度">11.6 生涯の繁殖成功度</h2>
+<p>マルサス係数は11.10式から <span class="math display">
+1 = \sum_{x=0} e^{-r(x+1)}\ l_x\ m_x
+</span></p>
+<p>と示されたが、陰関数なので扱いにくい。そのため<strong>生まれた1個体が生涯に生産する次世代の平均数である純繁殖率</strong>を用いる。<span class="math inline">m_x</span> は出産率 <span class="math inline">l_x</span> は 生存率である。 <span class="math display">
+R_0 = \sum^{\infty}_{x=0} p_0\dots p_{x-1}\ m_x =  \sum^{\infty}_{x=0} l_x m_x
+</span> さらに年齢ごとに行われる繁殖効果の違いを補正するため、集団サイズが急激に増大している時には<strong>遅い繁殖の価値を年あたり増加率 <span class="math inline">e^r</span> によって割り引く</strong>。</p>
+<p><span class="math display">
+f(s, r) = \sum^{\infty}_{x=0} p_0(s)\dots p_{x-1(s)}\ m_x(s)\ e^{-r(x+1)}
+</span> これらから齢ごとの生存率 <span class="math inline">px(s)</span> や出産率 <span class="math inline">m_x(s)</span> が戦略 <span class="math inline">s</span> に左右されることを示した。</p>
+<p>数学的には<strong>マルサス係数 <span class="math inline">r</span> を最大にすることと生涯の繁殖成功度 <span class="math inline">f(s,r)</span> を最大にすることは等価で</strong></p>
+<blockquote class="blockquote">
+<p>戦略<span class="math inline">s*</span> はマルサス係数 <span class="math inline">r(s)</span> を最大にする。この時 <span class="math inline">r^* = r(s*)</span> とおくと、$f(s, r) $ は <span class="math inline">s</span> の関数として <span class="math inline">s^*</span> の時最大になる。<br> 逆に <span class="math inline">s</span> が <span class="math inline">f(s, r)</span> を最大にするものならそれはマルサス係数 <span class="math inline">r</span> を最大にするものである。</p>
+</blockquote>
+<p>密度などに影響を受ける平衡状態では <span class="math inline">r^* = 0</span> が成り立ち生涯の繁殖成功度 <span class="math inline">f(s,0)</span> になる。</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
